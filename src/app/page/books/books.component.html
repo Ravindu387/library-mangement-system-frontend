@@ -1,0 +1,183 @@
+<div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h1 class="text-xl font-semibold text-gray-900 ">Books</h1>
+        <p class="text-sm text-gray-600">A comprehensive list of library books, displaying their title, ISBN, category, publication year, author ID, and availability</p>
+      </div>
+      <div class="flex space-x-2">
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors " data-bs-toggle="modal" data-bs-target="#addBook"> Add Books</button>
+      <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors " data-bs-toggle="modal" data-bs-target="#addCategory"> Add Category</button>
+      </div>
+          </div>
+    <!-- Table -->
+    <div class="m-5">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+          <tr>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Count</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Book ID</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Title</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">ISBN</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Category</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Publication Year</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Author ID</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Availability</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Edit</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr *ngFor="let book of bookList; index as i">
+            <td class="py-4 text-sm text-gray-600">{{i+1}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.id}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.title}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.isbn}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.category}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.publicationYear}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.authorId}}</td>
+            <td class="py-4 text-sm text-gray-600">{{book.availability}}</td>
+            <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateBook" (click)="updateBook(book)"><i class="bi bi-pencil-square"></i></button></td>
+            <td> <button type="button" class="btn btn-danger"(click)="deleteBookById(book.id)"><i class="bi bi-trash-fill"></i></button></td>
+          </tr>
+          <!-- Repeat similar structure for other rows -->
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- add category -->
+<div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Name</label>
+              <input type="text" class="form-control" id="recipient-name "  [(ngModel)]="category.name">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Description</label>
+              <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="category.description">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addCategory()">Add Category</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- add Book -->
+<div class="modal fade" id="addBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Book</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <input type="text" class="form-control" id="recipient-name " [(ngModel)]="book.title">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">ISBN</label>
+              <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="book.isbn">
+            </div>
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Category</label>
+                <select name="category" id="" class="form-control" [(ngModel)]="book.category">
+                    <option value="">Select an option</option>
+                    <option *ngFor="let category of categoryList" value="{{category.name}}">
+                        {{category.name}}
+                      </option>
+                </select>
+              </div>
+        <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Publication Year</label>
+            <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="book.publicationYear">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Author ID</label>
+            <select name="category" id="" class="form-control" [(ngModel)]="book.authorId">
+                <option value="">Select an option</option>
+                <option *ngFor="let author of authorList" value="{{author.id}}">
+                    {{author.name}}
+                  </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Availability</label>
+            <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="book.availability">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addBook()">Add Book</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+   <!-- update Book -->
+<div class="modal fade" id="updateBook" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Book</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Book ID</label>
+          <input type="text" class="form-control" id="recipient-name " [(ngModel)]="bookTemp.id" disabled>
+        </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="recipient-name " [(ngModel)]="bookTemp.title">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">ISBN</label>
+            <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="bookTemp.isbn">
+          </div>
+          <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Category</label>
+              <select name="category" id="" class="form-control" [(ngModel)]="bookTemp.category">
+                  <option value="">Select an option</option>
+                  <option *ngFor="let category of categoryList" value="{{category.name}}">
+                      {{category.name}}
+                    </option>
+              </select>
+            </div>
+      <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Publication Year</label>
+          <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="bookTemp.publicationYear">
+        </div>
+        <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Author ID</label>
+          <select name="category" id="" class="form-control" [(ngModel)]="bookTemp.authorId">
+              <option value="">Select an option</option>
+              <option *ngFor="let author of authorList" value="{{author.id}}">
+                  {{author.name}}
+                </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Availability</label>
+          <input type="text" class="form-control"  id="recipient-name"  [(ngModel)]="bookTemp.availability">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="updateBookById()">Update Book</button>
+      </div>
+    </div>
+  </div>
+</div>

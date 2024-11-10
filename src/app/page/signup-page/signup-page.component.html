@@ -1,0 +1,97 @@
+<div data-aos="fade-up">
+<div class="min-h-screen flex flex-col items-center justify-center px-4">
+  <!-- Logo -->
+  <div class="mb-8">
+    <img src="logo4.png" width="80" height="80" class="mx-auto "/>
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-full max-w-md space-y-6">
+    <div class="text-center">
+      <h1 class="text-2xl font-bold text-gray-900">Create your account</h1>
+    </div>
+
+    <form class="space-y-4">
+      <!-- Full Name Input -->
+      <div>
+        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">
+          Full name
+        </label>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          placeholder="Enter your full name"
+          [(ngModel)]="user.fname"
+          required
+        >
+      </div>
+
+      <!-- Email Input -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          Email address
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          placeholder="Enter your email"
+          [(ngModel)]="user.email"
+        >
+      </div>
+
+      <!-- Password Input -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+          Phone No.
+        </label>
+        <input
+          type="text"
+          name="password"
+          id="password"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          placeholder="Enter your phone number"
+          [(ngModel)]="user.phoneN"
+          
+        >
+      </div>
+
+      <!-- Confirm Password Input -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">
+          password
+        </label>
+        <input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          placeholder="Enter your password"
+          [(ngModel)]="user.password"
+
+        >
+      </div>
+
+      <!-- Sign Up Button -->
+      <button
+        type="submit"
+        (click)="checkeEmail()"
+        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors"
+      >
+        Sign up
+      </button>
+    </form>
+
+    <!-- Sign In Link -->
+    <p class="text-center text-sm text-gray-600">
+      Already have an account?
+      <a href="/signin-page/signup-page"  class="text-indigo-600 hover:text-500 font-medium ml-1">
+        Sign in
+      </a>
+    </p>
+  </div>
+</div>
+</div>

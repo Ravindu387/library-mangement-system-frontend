@@ -1,0 +1,13 @@
+/* library-support.component.css */
+:host {
+    display: block;
+  }
+  
+  .card {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .hover\:text-decoration-underline:hover {
+    text-decoration: underline !important;
+  }

@@ -1,0 +1,5 @@
+@import 'aos/dist/aos.css';
+button{
+    background-color: #023E8A;
+    border-radius: 30px;
+}

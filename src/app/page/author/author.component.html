@@ -1,0 +1,92 @@
+<div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h1 class="text-xl font-semibold text-gray-900 ">Authors</h1>
+        <p class="text-sm text-gray-600">A comprehensive list of library authors, displaying their name, biography, and book count</p>
+      </div>
+      <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors" data-bs-toggle="modal" data-bs-target="#addAuthor">        Add Author
+      </button>
+    </div>
+    <!-- Table -->
+    <div class="m-5">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+          <tr>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Count</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Author ID</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Name</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Biograhpy</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Edit</th>
+            <th class="py-3 text-left text-sm font-medium text-gray-900">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr *ngFor="let author of authorList; index as i">
+            <td class="py-4 text-sm text-gray-600">{{i+1}}</td>
+            <td class="py-4 text-sm text-gray-600">{{author.id}}</td>
+            <td class="py-4 text-sm font-medium text-gray-900">{{author.name}}</td>
+            <td class="py-4 text-sm text-gray-600">{{author.biography}}</td>
+            <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateAuthor" (click)="loadAuthor(author)"><i class="bi bi-pencil-square"></i></button></td>
+            <td> <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill" (click)="deleteAuthorById(author.id)"></i></button></td>
+          </tr>
+          <!-- Repeat similar structure for other rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- add category -->
+<div class="modal fade" id="addAuthor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Author</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label"  >Name</label>
+              <input type="text" class="form-control" id="recipient-name " [(ngModel)]="author.name" >
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Biography</label>
+              <input type="text" class="form-control"  id="recipient-name" [(ngModel)]="author.biography" >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="addAuthor()">Add Author</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="updateAuthor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Author</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"  >ID</label>
+                <input type="text" class="form-control" id="recipient-name " [(ngModel)]="authorTemp.id"disabled="true" >
+              </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label"  >Name</label>
+              <input type="text" class="form-control" id="recipient-name " [(ngModel)]="authorTemp.name" >
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Biography</label>
+              <input type="text" class="form-control"  id="recipient-name" [(ngModel)]="authorTemp.biography" >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="updateAuthor()">Update Author</button>
+        </div>
+      </div>
+    </div>
+  </div>
